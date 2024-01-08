@@ -3,30 +3,30 @@ import React, { useEffect, useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 
-const Veggie = () => {
-  const [veggie, setVeggie] = useState([]);
+const Dessert = () => {
+  const [dessert, setDessert] = useState([]);
 
   useEffect(() => {
-    getVeggie();
+    getHealthy();
   }, []);
-  const getVeggie = async () => {
-    const check = localStorage.getItem("veggie");
+  const getHealthy = async () => {
+    const check = localStorage.getItem("dessert");
 
     if (check) {
-      setVeggie(JSON.parse(check));
+      setDessert(JSON.parse(check));
     } else {
       const api = await fetch(
-        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=12&tags=vegetarian`
+        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=12&tags=dessert`
       );
       const data = await api.json();
-      localStorage.setItem("veggie", JSON.stringify(data.recipes));
+      localStorage.setItem("dessert", JSON.stringify(data.recipes));
       console.log(data.recipes);
-      setVeggie(data.recipes);
+      setDessert(data.recipes);
     }
   };
   return (
     <div className="app__popular app__container">
-      <h2>Veggitarian</h2>
+      <h2>Dessert</h2>
       <div className="app__cards">
         <Splide
           options={{
@@ -36,7 +36,7 @@ const Veggie = () => {
             gap: "5rem",
           }}
         >
-          {veggie.map((recipe) => (
+          {dessert.map((recipe) => (
             <SplideSlide key={recipe.id}>
               <div className="app__card">
                 <img src={recipe.image} alt={recipe.title} />
@@ -49,4 +49,5 @@ const Veggie = () => {
     </div>
   );
 };
-export default Veggie;
+
+export default Dessert;

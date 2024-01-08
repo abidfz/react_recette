@@ -1,12 +1,14 @@
 import React from "react";
 import Veggie from "../Veggie";
 import Popular from "../Popular";
+import Dessert from "../Dessert";
 
 const Home = () => {
   return (
     <div>
-      <Veggie />
       <Popular />
+      <Veggie />
+      <Dessert />
     </div>
   );
 };
